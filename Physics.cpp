@@ -1,4 +1,5 @@
 #include "Physics.h"
+#include"World.h"
 
 double dot(const Point& lhs, const Point& rhs) {
     return lhs.x * rhs.x + lhs.y * rhs.y;
@@ -22,7 +23,9 @@ void Physics::update(std::vector<Ball>& balls, const size_t ticks) const {
 
 void Physics::collideBalls(std::vector<Ball>& balls) const {
     for (auto a = balls.begin(); a != balls.end(); ++a) {
+        if(!a->isCollidable()) continue;
         for (auto b = std::next(a); b != balls.end(); ++b) {
+            if(!b->isCollidable()) continue;
             const double distanceBetweenCenters2 =
                 distance2(a->getCenter(), b->getCenter());
             const double collisionDistance = a->getRadius() + b->getRadius();

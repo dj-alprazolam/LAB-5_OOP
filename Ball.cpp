@@ -72,3 +72,11 @@ double Ball::getMass() const {
     // TODO: место для доработки
     return M_PI * std::pow(m_radius,3) * 4 / 3;
 }
+
+bool Ball::isCollidable() const{
+    return m_isCollidable;
+}
+
+void Ball::setCollidable(bool Collodable){
+    m_isCollidable = Collodable;
+}
