@@ -12,16 +12,16 @@ void Physics::setWorldBox(const Point& topLeft, const Point& bottomRight) {
     this->bottomRight = bottomRight;
 }
 
-void Physics::update(std::vector<Ball>& balls, const size_t ticks) const {
+void Physics::update(std::vector<Ball>& balls, const size_t ticks,std::vector<Dust>& dusts) const {
 
     for (size_t i = 0; i < ticks; ++i) {
         move(balls);
         collideWithBox(balls);
-        collideBalls(balls);
+        collideBalls(balls,dusts);
     }
 }
 
-void Physics::collideBalls(std::vector<Ball>& balls) const {
+void Physics::collideBalls(std::vector<Ball>& balls,std::vector<Dust>& dusts) const {
     for (auto a = balls.begin(); a != balls.end(); ++a) {
         if(!a->isCollidable()) continue;
         for (auto b = std::next(a); b != balls.end(); ++b) {
@@ -34,6 +34,16 @@ void Physics::collideBalls(std::vector<Ball>& balls) const {
 
             if (distanceBetweenCenters2 < collisionDistance2) {
                 processCollision(*a, *b, distanceBetweenCenters2);
+            }
+
+            Point collisionPoint = (a->getCenter() + b->getCenter()) / 2.0;
+            Color dustColor(0.6, 0.6, 0.6);
+
+            for (int i = 0; i < 6; ++i) {
+                double angle = (rand() % 360) * 3.14159265 / 180.0;
+                double speed = 60.0 + (rand() % 40);
+                Velocity dustVel(speed, angle);
+                dusts.emplace_back(collisionPoint, dustVel, 0.4, dustColor);
             }
         }
     }

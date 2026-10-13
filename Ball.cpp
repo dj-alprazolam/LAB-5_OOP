@@ -5,6 +5,12 @@
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
+
+Ball::Ball(const Point& center, double radius, const Color& color)
+    : m_center(center), m_radius(radius), m_color(color) {
+    m_mass = M_PI * std::pow(m_radius, 3) * 4.0 / 3.0;
+    m_isCollidable = true;
+}
 /**
  * Задает скорость объекта
  * @param velocity новое значение скорости
