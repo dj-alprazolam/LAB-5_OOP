@@ -34,16 +34,15 @@ void Physics::collideBalls(std::vector<Ball>& balls,std::vector<Dust>& dusts) co
 
             if (distanceBetweenCenters2 < collisionDistance2) {
                 processCollision(*a, *b, distanceBetweenCenters2);
-            }
+                Point collisionPoint = (a->getCenter() + b->getCenter()) / 2.0;
+                Color dustColor(0.6, 0.6, 0.6);
 
-            Point collisionPoint = (a->getCenter() + b->getCenter()) / 2.0;
-            Color dustColor(0.6, 0.6, 0.6);
-
-            for (int i = 0; i < 6; ++i) {
-                double angle = (rand() % 360) * 3.14159265 / 180.0;
-                double speed = 60.0 + (rand() % 40);
-                Velocity dustVel(speed, angle);
-                dusts.emplace_back(collisionPoint, dustVel, 0.4, dustColor);
+                for (int i = 0; i < 6; ++i) {
+                    double angle = (rand() % 360) * 3.14159265 / 180.0;
+                    double speed = 60.0 + (rand() % 40);
+                    Velocity dustVel(speed, angle);
+                    dusts.emplace_back(collisionPoint, dustVel, 0.4, dustColor);
+                }
             }
         }
     }
