@@ -5,7 +5,7 @@
 
 
     void Dust::draw(Painter& painter) const{
-        painter.draw(m_center,1.5,m_color);
+        painter.draw(m_center,20,m_color);
     }
 
     void Dust::update(double time){

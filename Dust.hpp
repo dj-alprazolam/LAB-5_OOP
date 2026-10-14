@@ -11,16 +11,10 @@ private:
     Velocity m_velocity;
     double m_time;
     Color m_color;
-
 public:
     Dust(const Point& center, const Velocity& velocity, double time, const Color& color);
-
     void draw(Painter& painter) const;
-
     void update(double time);
-
     bool isDeat() const;
-    
-
 };
 
