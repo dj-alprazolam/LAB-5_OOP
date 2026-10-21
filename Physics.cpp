@@ -41,7 +41,7 @@ void Physics::collideBalls(std::vector<Ball>& balls,std::vector<Dust>& dusts) co
                     double angle = (rand() % 360) * 3.14159265 / 180.0;
                     double speed = 60.0 + (rand() % 40);
                     Velocity dustVel(speed, angle);
-                    dusts.emplace_back(collisionPoint, dustVel, 0.4, dustColor);
+                    dusts.emplace_back(collisionPoint, dustVel, 1, dustColor);
                 }
             }
         }
