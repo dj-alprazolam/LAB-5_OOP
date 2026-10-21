@@ -40,3 +40,9 @@ target_compile_options(physics PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:/W4>
         $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic>
         )
+
+add_custom_command(TARGET physics POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    "${CMAKE_SOURCE_DIR}/data"
+    "$<TARGET_FILE_DIR:physics>/data"
+)
